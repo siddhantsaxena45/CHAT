@@ -1,0 +1,39 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WhatsApp</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <h1 class="all-chat-h1">All chats</h1>
+    <div class="container">
+        <form action="/chats/new" method="GET">
+            <button class="new-chat-btn">New Chat</button>
+        </form>
+        <% for(let chat of allchat){ %>
+            <div class="chat-card">
+                <div class="sender"> <i>Sender:
+                        <%= chat.from %>
+                    </i><span class="date-time">at <%= chat.formattedDate %>
+                            <% if(chat.edited) {%> (edited)<% }%></span></div>
+                <div class="message">
+                    <%= chat.message %>
+                </div>
+                <div class="receiver">Receiver: <i>
+                        <%= chat.to %>
+                    </i></div>
+                <div class="btns">
+                    <form action="/chats/<%= chat._id %>/edit/" method="GET">
+                        <button class="edit-chat-btn">Edit</button>
+                    </form>
+                    <form action="/chats/<%= chat._id %>?_method=DELETE" method="POST">
+                        <button class="delete-chat-btn">Delete</button>
+                    </form>
+                </div>
+    
+            </div>
+            <% } %>
+    </div>
+    
+</body>
+
+</html>
